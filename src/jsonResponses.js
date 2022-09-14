@@ -13,19 +13,32 @@ const respondJSON = (request, response, status, object) => {
 };
 
 const respondJSONMeta = (request, response, status) => {
-
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  response.writeHead(status,headers);
+  response.end();
 };
 
 const getUsers = (request, response) => {
-
+  // same as 'users' : users
+  const responseJSON = {
+    users, 
+  };
+  
+  return respondJSON(request,response,200,responseJSON);
 };
 
 const getUsersMeta = (request, response) => {
-
+  return respondJSONMeta(request,response,200);
 };
 
 const updateUser = (request, response) => {
-
+  const newUser = {
+    createdAt: Date.now(),
+  }
+  users[newUser.createdAt] = newUser;
+  return respondJSON(request,response,201,newUser);
 };
 
 const notFound = (request, response) => {
@@ -38,7 +51,7 @@ const notFound = (request, response) => {
 };
 
 const notFoundMeta = (request, response) => {
-
+  return respondJSONMeta(request,response,404);
 };
 
 module.exports = {
